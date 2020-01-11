@@ -1,4 +1,4 @@
-name: CI
+name: DotNet CI
 
 on: [push]
 
@@ -9,7 +9,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-    - uses: actions/setup-dotnet@v1
+    - name: dotnet build
+      working-directory: src
+      uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '3.1.100' # SDK Version to use
-    - run: dotnet build
+      run: |
+        dotnet build netcore-bff.sln
